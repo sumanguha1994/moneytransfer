@@ -11,7 +11,7 @@ class ApiCtrl extends REST_Controller {
 
     /**
      * Get All Data from this method.
-     *
+     * All metods starts with $controller_method = "index_" . $this->request->method;  //"index_" prefix
      * @return Response
     */
     public function index_get($id = 0)
