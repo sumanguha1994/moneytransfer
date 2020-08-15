@@ -7,27 +7,24 @@ class ApiCtrl extends REST_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->database();
+        $this->load->model('ApiModel', 'api');
     }
-
     /**
      * Get All Data from this method.
      * All metods starts with $controller_method = "index_" . $this->request->method;  //"index_" prefix
      * @return Response
     */
-    public function index_get($id = 0)
-	{
-        if(!empty($id)){
-            $data = $this->db->get_where("items", ['id' => $id])->row_array();
-        }else{
-            $data = $this->db->get("items")->result();
-        }
-        $this->response($data, REST_Controller::HTTP_OK);
-    }
-
     public function index_post()
     {
-        $input = $this->input->post();
-        $this->db->insert('items',$input);
-        $this->response(['Item created successfully.'], REST_Controller::HTTP_OK);
-    } 
+        $input = $this->input;
+        if($input->post('signup') == '1'){
+            $data = $this->api->signup_api($this->input->post(), true);
+            $this->response($data, REST_Controller::HTTP_OK);
+        }elseif($input->post('login') == '1'){
+            $data = $this->api->login_api($this->input->post(), true);
+            $this->response($data, REST_Controller::HTTP_OK);
+        }else{
+            $this->response(['Validation Error.'], REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
+        }
+    }
 }
