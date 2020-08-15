@@ -55,7 +55,7 @@
                         <ul class="kt-menu__nav ">
                             <!-- users Control start-->
                             <li title="Users" id="userli" class="kt-menu__item  kt-menu__item--submenu kt-menu__item--submenu-fullheight kt-menu__item--open kt-menu__item--here" aria-haspopup="true" data-ktmenu-submenu-toggle="click" data-ktmenu-dropdown-toggle-class="kt-aside-menu-overlay--on">
-                                <a href="#!" class="kt-menu__link kt-menu__toggle">
+                                <a href="<?= base_url('user')?>" class="kt-menu__link kt-menu__toggle">
                                     <i class="kt-menu__link-icon flaticon2-user-1"></i>
                                     <span class="kt-menu__link-text">Users</span>
                                     <i class="kt-menu__ver-arrow la la-angle-right"></i>
@@ -63,9 +63,16 @@
                             </li>
                             <!-- Report Summary start-->
                             <li title="Report Summary" id="reportli" class="kt-menu__item  kt-menu__item--submenu kt-menu__item--submenu-fullheight kt-menu__item--open kt-menu__item--here" aria-haspopup="true" data-ktmenu-submenu-toggle="click" data-ktmenu-dropdown-toggle-class="kt-aside-menu-overlay--on">
-                                <a href="#!" class="kt-menu__link kt-menu__toggle">
+                                <a href="<?= base_url('log')?>" class="kt-menu__link kt-menu__toggle">
                                     <i class="kt-menu__link-icon flaticon2-sheet"></i>
-                                    <span class="kt-menu__link-text">Report Summary</span>
+                                    <span class="kt-menu__link-text">Transaction Log</span>
+                                    <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                </a>
+                            </li>
+                            <li title="Report Summary" id="reportli" class="kt-menu__item  kt-menu__item--submenu kt-menu__item--submenu-fullheight kt-menu__item--open kt-menu__item--here" aria-haspopup="true" data-ktmenu-submenu-toggle="click" data-ktmenu-dropdown-toggle-class="kt-aside-menu-overlay--on">
+                                <a href="<?= base_url('wallet')?>" class="kt-menu__link kt-menu__toggle">
+                                    <i class="kt-menu__link-icon flaticon2-add-1"></i>
+                                    <span class="kt-menu__link-text">Transaction Log</span>
                                     <i class="kt-menu__ver-arrow la la-angle-right"></i>
                                 </a>
                             </li>

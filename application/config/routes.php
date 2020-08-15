@@ -12,6 +12,14 @@ $route['dash'] = 'Welcome/dashboard';
 $route['login'] = 'Welcome/login';
 $route['logout'] = 'Welcome/logout';
 
+$route['user'] = 'Welcome/userView';
+$route['user-delete'] = 'Welcome/userDelete';
+$route['user-update'] = 'Welcome/upserUpdate';
+
+$route['log'] = 'Welcome/logView';
+
+$route['wallet'] = 'Welcome/walletView';
+$route['money-add'] = 'Welcome/walletMoneyAdd';
 //api
 $route['api/signup'] = 'ApiCtrl/index_post';
 $route['api/login'] = 'ApiCtrl/index_post';

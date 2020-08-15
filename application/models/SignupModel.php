@@ -31,5 +31,50 @@ class SignupModel extends CI_Model {
             }
         }
     }
-    
+    //user
+    public function getall_user()
+    {
+        return $this->db->select('*')->from('user')
+                        ->get()->result_array();
+    }
+    public function user_delete($id)
+    {
+        return $this->db->where('id', $this->db->escape_str(trim($id)))->delete('user');
+    }
+    public function update_user($updata)
+    {
+        $uparray = array(
+            'name' => $this->db->escape_str(trim($updata['username'])),
+            'adharno' => $this->db->escape_str(trim($updata['addharno'])),
+            'mobileno' => $this->db->escape_str(trim($updata['usermobile'])),
+            'yourid' => $this->db->escape_str(trim($updata['yourid'])),
+        );
+        return $this->db->where('id', $this->db->escape_str(trim($updata['id'])))
+                            ->update('user', $uparray);
+    }
+
+    //logs
+    public function get_logs()
+    {
+        return $this->db->select('p.*, u.name as sendername')->from('payment as p')
+                        ->join('user as u', 'u.id = p.sid')
+                        ->get()->result_array();
+    }
+
+    //wallet
+    public function add_wallet_money($wallet)
+    {
+        $uid = $wallet['userid'];
+        $exists = $this->wallet_money($uid);
+        $upamt = $exists + floatval($wallet['amount']);
+        return $this->db->where('uid', $uid)
+                            ->update('wallet', array('money' => $upamt));
+    }
+    public function wallet_money($uid)
+    {
+        $money = $this->db->where('uid', $uid)
+                                ->select('money')->from('wallet')
+                                ->get()->row();
+        return floatval($money->money);
+    }
 }

@@ -43,5 +43,43 @@ class Welcome extends CI_Controller {
 		{
 			$this->load->view('index');
 		}
-	//
+	//user
+		public function userView()
+		{
+			$data['user'] = $this->admin->getall_user();
+			$this->load->view('user', $data);
+		}
+		public function userDelete()
+		{
+			$id = $this->input->get('id', TRUE);
+			if(!empty($id)){
+				$this->admin->user_delete($id);
+				redirect('user');
+			}else{
+				redirect('user');
+			}
+		}
+		public function upserUpdate()
+		{
+			$this->admin->update_user($this->input->post(), true);
+			redirect('user');
+		}
+	//log
+		public function logView()
+		{
+			$data['log'] = $this->admin->get_logs(); 
+			$this->load->view('log', $data);
+		}
+	//wallet
+		public function walletView()
+		{
+			$data['user'] = $this->admin->getall_user();
+			$this->load->view('wallet', $data);
+		}
+		public function walletMoneyAdd()
+		{
+			$add = $this->admin->add_wallet_money($this->input->post(), true);
+			$this->session->set_flashdata('succ', "Money Added Successfully.");
+			redirect('wallet');
+		}
 }
