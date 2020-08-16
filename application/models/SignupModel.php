@@ -31,10 +31,22 @@ class SignupModel extends CI_Model {
             }
         }
     }
+
+    //dashboard
+    public function total_user()
+    {
+        return $this->db->select('*')->get('user')->num_rows();
+    }
+    public function total_transaction()
+    {
+        return $this->db->select("SUM(total_transfer_money) as total")->get('wallet')->row();
+    }
+
     //user
     public function getall_user()
     {
-        return $this->db->select('*')->from('user')
+        return $this->db->select('u.*, w.money')->from('user as u')
+                        ->join('wallet as w', 'w.uid = u.id')
                         ->get()->result_array();
     }
     public function user_delete($id)

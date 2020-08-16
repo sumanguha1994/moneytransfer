@@ -1,4 +1,44 @@
 <?php include('layout_master/header.php'); ?>
+<style>
+	body{
+		margin-top:20px;
+		background:#DCDCDC;
+	}
+	.user-position {
+		position: absolute;
+		top: 0;
+		border-left: 1px solid #dee2e6;
+		bottom: 0;
+		width: 44px;
+		font-size: 16px;
+		text-align: center;
+		right: 0;
+		left: auto;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-webkit-box-pack: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: row;
+		flex-direction: row
+	}
+
+	.user-position span {
+		-webkit-transform: rotate(90deg);
+		transform: rotate(90deg)
+	}
+
+	.avatar-md {
+		height: 3.5rem;
+		width: 3.5rem;
+	}
+</style>
 <!-- begin:: Subheader -->
 <div class="kt-subheader   kt-grid__item" id="kt_subheader">
 	<div class="kt-container  kt-container--fluid ">
@@ -33,16 +73,50 @@
 				<div class="kt-portlet__head kt-portlet__head--lg kt-portlet__head--noborder kt-portlet__head--break-sm">
 					<div class="kt-portlet__head-label">
 						<h3 class="kt-portlet__head-title">
-							Exclusive Datatable Plugin
+							<?= $this->session->userdata('adminemail');?>
 						</h3>
 					</div>
 				</div>
 				<div class="kt-portlet__body kt-portlet__body--fit">
-
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="card widget-user">
+									<div class="card-body">
+										<img src="<?= base_url('assets/user.png')?>" class="img-fluid d-block rounded-circle avatar-md" alt="user">
+										<div class="wid-u-info">
+											<h5 class="mt-3 mb-1">Total User</h5>
+											<p class="text-muted mb-0"><?= $totaluser?></p>
+											<div class="user-position">
+												<span class="text-warning">Total Users</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+							<div class="col-md-6">
+								<div class="card widget-user">
+									<div class="card-body">
+										<img src="<?= base_url('assets/money.png')?>" class="img-fluid d-block rounded-circle avatar-md" alt="user">
+										<div class="wid-u-info">
+											<h5 class="mt-3 mb-1">Transaction Money</h5>
+											<p class="text-muted mb-0"><?= $total_trans->total?></p>
+											<div class="user-position">
+												<span class="text-info">Total Transaction</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br /><br />
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script src="/metronic/theme/html/demo3/dist/assets/js/pages/widgets.js?v=7.0.8"></script>
 <!-- end:: Content -->
 <?php include('layout_master/footer.php'); ?>

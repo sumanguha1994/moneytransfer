@@ -36,7 +36,7 @@
 					</div>
 				</div>
 				<div class="kt-portlet__body kt-portlet__body--fit">
-                <table class="table table-striped- table-hover" id="tbldata">
+                    <table class="table table-striped- table-hover" id="tbldata">
                         <thead class="kt-datatable__head">
                             <tr class="kt-datatable__row" style="left: 0px;">
                                 <th data-field="RecordID" class="kt-datatable__cell--center kt-datatable__cell kt-datatable__cell--check">
@@ -56,6 +56,12 @@
                                     <span style="width: 200px;">Mobile No.</span>
                                 </th>
                                 <th data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell kt-datatable__cell--sort">
+                                    <span style="width: 200px;">User ID</span>
+                                </th>
+                                <th data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell kt-datatable__cell--sort">
+                                    <span style="width: 200px;">Wallet Balance</span>
+                                </th>
+                                <th data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell kt-datatable__cell--sort">
                                     <span style="width: 100px;">Actions</span>
                                 </th>
                             </tr>
@@ -67,6 +73,8 @@
                                 <td><?= $user[$i]['name'] ?></td>
                                 <td><?= $user[$i]['adharno'] ?></td>
                                 <td><?= $user[$i]['mobileno'] ?></td>
+                                <td><?= $user[$i]['yourid'] ?></td>
+                                <td><?= $user[$i]['money'] ?></td>
                                 <td>
                                     <a href="<?= base_url('user-delete?id='.$user[$i]['id'] )?>"><i class="fas fa-trash"></i></a> | 
                                     <a href="#!" onclick="editfunc(<?= $user[$i]['id']?>)"><i class="fas fa-pencil-alt"></i></a>
