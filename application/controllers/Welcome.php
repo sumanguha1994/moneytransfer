@@ -41,7 +41,8 @@ class Welcome extends CI_Controller {
 	//dashboard
 		public function dashboard()
 		{
-			$data['totaluser'] = $this->admin->total_user();
+			$totaluser = $this->admin->total_user();
+		    $data['totaluser'] = intval($totaluser) - 1;
 			$data['total_trans'] = $this->admin->total_transaction();
 			$this->load->view('index', $data);
 		}

@@ -21,7 +21,8 @@ class SignupModel extends CI_Model {
                                         ->where('password', $this->db->escape_str(trim($loginArray['password'])))
                                             ->get()
                                                 ->row()){
-                $this->session->set_userdata('adminid', $sql->id);
+                $admin = $this->db->select('id')->where('name', 'admin')->get('user')->row();
+                $this->session->set_userdata('adminid', $admin->id);
                 $this->session->set_userdata('adminemail', $sql->email);
                 log_message('info', "Login matched");
                 return true;
@@ -39,7 +40,7 @@ class SignupModel extends CI_Model {
     }
     public function total_transaction()
     {
-        return $this->db->select("SUM(total_transfer_money) as total")->get('wallet')->row();
+        return $this->db->select("SUM(ramount) as total")->get('payment')->row();
     }
 
     //user
@@ -79,8 +80,20 @@ class SignupModel extends CI_Model {
         $uid = $wallet['userid'];
         $exists = $this->wallet_money($uid);
         $upamt = $exists + floatval($wallet['amount']);
-        return $this->db->where('uid', $uid)
+        $wlt = $this->db->where('uid', $uid)
                             ->update('wallet', array('money' => $upamt));
+        if($wlt){
+            $receiver = $this->receiver($uid);
+            $pay = array(
+                'sid' => $this->session->userdata('adminid'),
+                'rname' => $receiver->name,
+                'rmobile' => $receiver->mobileno,
+                'ramount' => floatval($wallet['amount']),
+                'rtoken' => $receiver->receive_token,
+            );
+            $this->db->insert('payment', $pay);
+        }
+        return true;
     }
     public function wallet_money($uid)
     {
@@ -88,5 +101,13 @@ class SignupModel extends CI_Model {
                                 ->select('money')->from('wallet')
                                 ->get()->row();
         return floatval($money->money);
+    }
+    public function receiver($uid)
+    {
+        return $this->db->select('u.*, w.receive_token')
+                            ->from('user as u')
+                            ->where('u.id', $uid)
+                            ->join('wallet as w', 'w.uid = u.id')
+                            ->get()->row();
     }
 }
