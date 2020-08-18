@@ -10,11 +10,11 @@ class ApiModel extends CI_Model {
 //post apis	
 	public function signup_api($signup)
 	{
-		$this->form_validation->set_rules('name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('adharno', 'Adhar No', 'trim|required');
-        $this->form_validation->set_rules('mobileno', 'Mobile No', 'trim|required');
-        $this->form_validation->set_rules('yourid', 'YourID', 'trim|required');
-        if($this->form_validation->run() != FALSE){
+		//$this->form_validation->set_rules('name', 'Name', 'trim|required');
+        //$this->form_validation->set_rules('adharno', 'Adhar No', 'trim|required');
+        //$this->form_validation->set_rules('mobileno', 'Mobile No', 'trim|required');
+        //$this->form_validation->set_rules('yourid', 'YourID', 'trim|required');
+        //if($this->form_validation->run() != FALSE){
             $userdata = array(
                 'name' => $this->db->escape_str(trim($signup['name'])),
                 'adharno' => $this->db->escape_str(trim($signup['adharno'])),
@@ -44,16 +44,16 @@ class ApiModel extends CI_Model {
 			}else{
 				return "Something Went Wrong !!";
 			}
-		}else{
-			return "Validation Error !!";
-		}
+		//}else{
+		//	return "Validation Error !!";
+		//}
 	}
 
 	public function login_api($login)
 	{
-		$this->form_validation->set_rules('mobileno', 'Mobile No', 'trim|required');
-        $this->form_validation->set_rules('yourid', 'YourID', 'trim|required');
-        if($this->form_validation->run() != FALSE){
+		//$this->form_validation->set_rules('mobileno', 'Mobile No', 'trim|required');
+        //$this->form_validation->set_rules('yourid', 'YourID', 'trim|required');
+        //if($this->form_validation->run() != FALSE){
 			$user = $this->db->select('*')
 							->from('user')
 							->where('mobileno', $this->db->escape_str(trim($login['mobileno'])))
@@ -65,19 +65,19 @@ class ApiModel extends CI_Model {
 			}else{
 				return "No Data Found";
 			}
-		}else{
-			return "validationerror";
-		}
+		//}else{
+		//	return "validationerror";
+		//}
 	}
 	
 	public function payment_api($pay)
 	{
-		$this->form_validation->set_rules('sid', 'Sender ID', 'trim|required');
-		$this->form_validation->set_rules('rname', 'Receiver Name', 'trim|required');
-        $this->form_validation->set_rules('rmobile', 'Receiver Mobile', 'trim|required');
-        $this->form_validation->set_rules('ramount', 'Receiver Amount', 'trim|required');
-        $this->form_validation->set_rules('rtoken', 'Receiver Token', 'trim|required');
-        if($this->form_validation->run() != FALSE){
+		//$this->form_validation->set_rules('sid', 'Sender ID', 'trim|required');
+		//$this->form_validation->set_rules('rname', 'Receiver Name', 'trim|required');
+        //$this->form_validation->set_rules('rmobile', 'Receiver Mobile', 'trim|required');
+        //$this->form_validation->set_rules('ramount', 'Receiver Amount', 'trim|required');
+        //$this->form_validation->set_rules('rtoken', 'Receiver Token', 'trim|required');
+        //if($this->form_validation->run() != FALSE){
 			$patdata = array(
 				'sid' => $this->db->escape_str(trim($pay['sid'])),
 				'rname' => $this->db->escape_str(trim($pay['rname'])),
@@ -122,9 +122,9 @@ class ApiModel extends CI_Model {
 			}else{
 				return "Something Went Wrong !!";
 			}
-		}else{
-			return "validation error";
-		}
+		//}else{
+		//	return "validation error";
+		//}
 	}
 
 	public function wallet_data($id)
@@ -201,6 +201,24 @@ class ApiModel extends CI_Model {
 								->where('id', $this->db->escape_str(trim($uid)))->get()->row();
 			return $user;
 		}else{
+			return "User ID required !!";
+		}
+	}
+	
+	public function receiver_api($rtoken)
+	{
+	    if(!empty($rtoken)){
+	        $receiver = $this->db->select('w.receive_token, u.*')
+	                            ->from('wallet as w')
+	                            ->where('w.receive_token', $this->db->escape_str(trim($rtoken)))
+	                            ->join('user as u', 'u.id = w.uid')
+	                            ->get()->row();
+	       if(!empty($receiver)){
+	           return $receiver;
+	       }else{
+	           return "NO User Found !!";
+	       }
+	    }else{
 			return "User ID required !!";
 		}
 	}

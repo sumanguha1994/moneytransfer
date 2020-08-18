@@ -21,14 +21,21 @@ $route['log'] = 'Welcome/logView';
 $route['wallet'] = 'Welcome/walletView';
 $route['money-add'] = 'Welcome/walletMoneyAdd';
 //api
+/*
 $route['api/signup'] = 'ApiCtrl/index_post';
 $route['api/login'] = 'ApiCtrl/index_post';
 $route['api/payment'] = 'ApiCtrl/index_post';
+$route['api/update-userdata'] = 'ApiCtrl/index_post';
+*/
+$route['api/signup'] = 'ApiCtrl/index_get';
+$route['api/login'] = 'ApiCtrl/index_get';
+$route['api/payment'] = 'ApiCtrl/index_get';
 $route['api/get-wallet'] = 'ApiCtrl/index_get';
 $route['api/get-alllog'] = 'ApiCtrl/index_get';
 $route['api/get-log'] = 'ApiCtrl/index_get';
 $route['api/get-userdata'] = 'ApiCtrl/index_get';
-$route['api/update-userdata'] = 'ApiCtrl/index_post';
+$route['api/update-userdata'] = 'ApiCtrl/index_get';
+$route['api/receiver-details'] = 'ApiCtrl/index_get';
 
 #############################################################################################################
 # http://localhost/moneytransfer/api/signup             --post-- [signup|name|adharno|mobileno|yourid]      #
