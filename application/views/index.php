@@ -101,7 +101,9 @@
 										<img src="<?= base_url('assets/money.png')?>" class="img-fluid d-block rounded-circle avatar-md" alt="user">
 										<div class="wid-u-info">
 											<h5 class="mt-3 mb-1">Transaction Money</h5>
-											<p class="text-muted mb-0"><?= $total_trans->total?></p>
+											<p class="text-muted mb-0">
+												<?php if(empty($total_trans->total)): echo "₹0";else: echo '₹'.$total_trans->total;endif;?>
+											</p>
 											<div class="user-position">
 												<span class="text-info">Total Transaction</span>
 											</div>

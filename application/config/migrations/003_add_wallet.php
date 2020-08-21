@@ -1,5 +1,5 @@
 <?php
-class Migration_admin_signup extends CI_Migration
+class Migration_Add_Wallet extends CI_Migration
 {
   //create
     public function up(){

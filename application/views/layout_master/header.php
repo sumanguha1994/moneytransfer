@@ -98,26 +98,6 @@
                     <!-- end: Header Menu -->
                     <!-- begin:: Header Topbar -->
                     <div class="kt-header__topbar">
-                        <!--begin: Search -->
-                        <div class="kt-header__topbar-item kt-header__topbar-item--search">
-                            <div class="kt-header__topbar-wrapper">
-                                <div class="kt-quick-search kt-quick-search--inline kt-quick-search--result-compact" id="kt_quick_search_inline">
-                                    <form method="get" class="kt-quick-search__form">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend"><span class="input-group-text"><i class="flaticon2-search-1"></i></span></div>
-                                            <input type="text" class="form-control kt-quick-search__input" placeholder="Search...">
-                                            <div class="input-group-append"><span class="input-group-text"><i class="la la-close kt-quick-search__close" style="display: none;"></i></span></div>
-                                        </div>
-                                    </form>
-                                    <div id="kt_quick_search_toggle" data-toggle="dropdown" data-offset="0px,10px"></div>
-                                    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-lg">
-                                        <div class="kt-quick-search__wrapper kt-scroll" data-scroll="true" data-height="300" data-mobile-height="200">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end: Search -->
                         <div class="kt-header__topbar-item kt-header__topbar-item--user">
                             <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
                                 <span class="kt-hidden kt-header__topbar-welcome">Hi,</span>

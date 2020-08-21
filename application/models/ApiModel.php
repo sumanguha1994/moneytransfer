@@ -97,7 +97,7 @@ class ApiModel extends CI_Model {
 					$update = $this->db->where('uid', $this->db->escape_str(trim($pay['sid'])))
 											->update('wallet', $updatedata);
 					if($update){
-						$r_wallet_money = $this->wallet_money($this->db->escape_str(trim($pay['rmobile'])));
+						$r_wallet_money = $this->get_wallet_money($this->db->escape_str(trim($pay['rmobile'])));
 						if($r_wallet_money){
 							$up_money = $r_wallet_money[0] + floatval($pay['ramount']);
 							$uparray = array(
@@ -142,7 +142,7 @@ class ApiModel extends CI_Model {
 		}
 	}
 
-	public function wallet_money($mobileno)
+	public function get_wallet_money($mobileno)
 	{
 		$data = array();
 		$uid = $this->db->select('id')->from('user')
@@ -197,8 +197,9 @@ class ApiModel extends CI_Model {
 	public function user_api($uid)
 	{
 		if(!empty($uid)){
-			$user = $this->db->select('*')->from('user')
-								->where('id', $this->db->escape_str(trim($uid)))->get()->row();
+			$user = $this->db->select('u.*, w.receive_token')->from('user as u')
+								->join('wallet as w', 'w.uid = u.id')
+								->where('u.id', $this->db->escape_str(trim($uid)))->get()->row();
 			return $user;
 		}else{
 			return "User ID required !!";
