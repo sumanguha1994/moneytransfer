@@ -36,6 +36,7 @@ $route['api/get-log'] = 'ApiCtrl/index_get';
 $route['api/get-userdata'] = 'ApiCtrl/index_get';
 $route['api/update-userdata'] = 'ApiCtrl/index_get';
 $route['api/receiver-details'] = 'ApiCtrl/index_get';
+$route['api/profile_pic_chnage'] = 'ApiCtrl/index_get';
 
 #############################################################################################################
 # http://localhost/moneytransfer/api/signup             --get-- [signup|name|adharno|mobileno|yourid]       #

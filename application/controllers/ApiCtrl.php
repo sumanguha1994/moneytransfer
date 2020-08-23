@@ -48,6 +48,9 @@ class ApiCtrl extends REST_Controller {
         }elseif($input->get('receive') == '1'){
             $data = $this->api->receiver_api($this->input->get('rtoken'), true);
             $this->response($data, REST_Controller::HTTP_OK);
+        }elseif($input->get('profile') == '1'){
+            $data = $this->api->profile_pic_change($this->input->get(), true);
+            $this->response($data, REST_Controller::HTTP_OK);
         }else{
             $this->response(['Validation Error.'], REST_Controller::HTTP_NON_AUTHORITATIVE_INFORMATION);
         }

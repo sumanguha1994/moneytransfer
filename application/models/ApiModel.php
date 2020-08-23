@@ -15,6 +15,7 @@ class ApiModel extends CI_Model {
         //$this->form_validation->set_rules('mobileno', 'Mobile No', 'trim|required');
         //$this->form_validation->set_rules('yourid', 'YourID', 'trim|required');
         //if($this->form_validation->run() != FALSE){
+		if($this->get_wallet_money($this->db->escape_str(trim($signup['mobileno']))) == false){
             $userdata = array(
                 'name' => $this->db->escape_str(trim($signup['name'])),
                 'adharno' => $this->db->escape_str(trim($signup['adharno'])),
@@ -44,6 +45,9 @@ class ApiModel extends CI_Model {
 			}else{
 				return "Something Went Wrong !!";
 			}
+		}else{
+			return "Mobile NO Already Exists !!";
+		}
 		//}else{
 		//	return "Validation Error !!";
 		//}
@@ -184,9 +188,11 @@ class ApiModel extends CI_Model {
 	public function log_api($uid)
 	{
 		if(!empty($uid)){
-			$pay = $this->db->select('*')->from('payment')
-							->where('sid', $this->db->escape_str(trim($uid)))
-							->order_by('id', 'desc')->limit(5)
+			$pay = $this->db->select('p.*, u.*, pd.user_profile')->from('payment as p')
+							->where('p.sid', $this->db->escape_str(trim($uid)))
+							->join('user as u', 'u.id = p.sid')
+							->join('user as pd', 'pd.id = p.sid')
+							->order_by('p.id', 'desc')->limit(5)
 							->get()->result_array();
 			return $pay;
 		}else{
@@ -247,6 +253,32 @@ class ApiModel extends CI_Model {
 			}
 		}else{
 			return "User Id required !!";
+		}
+	}
+
+	public function profile_pic_change($udata)
+	{
+	    $uid = $udata['uid'];
+	    $url = $udata['fileurl'];
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $url);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curl, CURLOPT_SSLVERSION, 3);
+		$file_data = curl_exec($curl);
+		curl_close($curl);
+		$file_path = 'upload/' . $uid . '.jpg';
+		$file = fopen($file_path, 'wb');
+        fputs($file, $file_data);
+        fclose($file);
+        $updata = array(
+			'user_profile' => $file_path,
+		);
+		$up = $this->db->where('id', $uid)
+						->update('user', $updata);
+		if($up){
+		    return $file_path;
+		}else{
+		    return "Profile pic not update !!";
 		}
 	}
 }
