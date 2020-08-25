@@ -69,7 +69,7 @@ class SignupModel extends CI_Model {
     //logs
     public function get_logs()
     {
-        return $this->db->select('p.*, u.name as sendername')->from('payment as p')
+        return $this->db->select('p.*, u.name as sendername, u.mobileno as senderph')->from('payment as p')
                         ->join('user as u', 'u.id = p.sid')
                         ->get()->result_array();
     }

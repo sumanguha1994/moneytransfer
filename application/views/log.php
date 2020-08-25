@@ -49,6 +49,9 @@
                                 <th data-field="Status" class="kt-datatable__cell kt-datatable__cell--sort">
                                     <span style="width: 100px;">Sender Name</span>
                                 </th>
+                                <th data-field="Status" class="kt-datatable__cell kt-datatable__cell--sort">
+                                    <span style="width: 100px;">Sender Phone NO.</span>
+                                </th>
                                 <th data-field="Type" class="kt-datatable__cell kt-datatable__cell--sort">
                                     <span style="width: 50px;">Receiver Name</span>
                                 </th>
@@ -71,6 +74,7 @@
                             <tr data-row="0" class="kt-datatable__row" style="left: 0px;">
                                 <td class="kt-datatable__cell--center kt-datatable__cell kt-datatable__cell--check" data-field="RecordID"><span style="width: 40px;"><label class="kt-checkbox kt-checkbox--single kt-checkbox--solid"><input type="checkbox" value="170">&nbsp;<span></span></label></span></td>
                                 <td><?= $log[$i]['sendername'] ?></td>
+                                <td><?= $log[$i]['senderph'] ?></td>
                                 <td><?= $log[$i]['rname'] ?></td>
                                 <td><?= $log[$i]['rmobile'] ?></td>
                                 <td><?= $log[$i]['ramount'] ?></td>

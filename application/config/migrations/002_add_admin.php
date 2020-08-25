@@ -24,11 +24,11 @@ class Migration_Add_Admin extends CI_Migration
            )
         );
         $this->dbforge->add_key('id', TRUE);
-        $this->dbforge->create_table('user');
+        $this->dbforge->create_table('admin');
     }
     //down
     public function down()
     {
-        $this->dbforge->drop_table('user');
+        $this->dbforge->drop_table('admin');
     }
 }
