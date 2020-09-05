@@ -110,4 +110,29 @@ class SignupModel extends CI_Model {
                             ->join('wallet as w', 'w.uid = u.id')
                             ->get()->row();
     }
+    public function walletChecking($check)
+    {
+        $sql = $this->db->select('*')
+                    ->from('admin')
+                        ->where('email', $this->db->escape_str(trim($check['email'])))
+                        ->where('password', $this->db->escape_str(trim($check['password'])))
+                        ->where('loginfor', $this->db->escape_str(trim($check['loginfor'])))
+                            ->get()
+                                ->row();
+        if(!empty($sql)){
+            $this->session->set_userdata('original_admin_id', $sql->id);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    //change password
+    public function changepass($change)
+    {
+        $data = array(
+            'password' => $change['newpass']
+        );
+        return $this->db->where('password', $change['oldpass'])
+                        ->update('admin', $data);
+    }
 }

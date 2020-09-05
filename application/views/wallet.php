@@ -52,7 +52,7 @@
                                     <select name="userid" id="userid" class="form-control">
                                         <option selected disabled>Choose One--</option>
                                         <?php for($i = 0;$i < count($user);$i++): ?>
-                                            <option value="<?= $user[$i]['id']?>"><?= $user[$i]['name']?></option>
+                                            <option value="<?= $user[$i]['id']?>"><?= $user[$i]['name']?> (<?= $user[$i]['mobileno']?>)</option>
                                         <?php endfor; ?>
                                     </select>
                                 </div>

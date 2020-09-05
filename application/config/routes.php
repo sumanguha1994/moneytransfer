@@ -18,8 +18,13 @@ $route['user-update'] = 'Welcome/upserUpdate';
 
 $route['log'] = 'Welcome/logView';
 
+$route['walletlogin'] = 'Welcome/walletlogin';
 $route['wallet'] = 'Welcome/walletView';
+$route['wallet-view'] = 'Welcome/walletPageView';
 $route['money-add'] = 'Welcome/walletMoneyAdd';
+
+$route['change-password'] = 'Welcome/changepassword';
+$route['chnage-pass-form'] = 'Welcome/chnagepassform';
 //api
 /*
 $route['api/signup'] = 'ApiCtrl/index_post';
